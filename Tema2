@@ -1,0 +1,7 @@
+syms t n
+T=40;
+w0=2*pi/T;
+n=1:50;
+a0=(1/T)*int(1,t,0,2)
+an=(2/T)*int(1*cos(n*w0*t),t,0,2)
+bn=(2/T)*int(1*sin(n*w0*t),t,0,2)
