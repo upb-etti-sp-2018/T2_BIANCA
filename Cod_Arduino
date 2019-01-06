@@ -1,0 +1,54 @@
+#define trigPin 3
+#define echoPin 4
+#define buzzer 8
+int sound = 250;
+void setup() {
+  Serial.begin (9600);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  digitalWrite(buzzer, HIGH);
+}
+void loop() {
+  long duration, distance;
+  digitalWrite(trigPin, LOW); 
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration/2) / 29.1;
+  if (distance <= 50) {
+    sound = 300;
+}
+  if (distance < 40) {
+      sound = 350;
+}
+  if (distance < 30) {
+      sound = 400;
+} 
+  if (distance < 25) {
+    sound = 450;
+}
+  if (distance < 20) {
+    sound = 500;
+}
+if (distance < 15) {
+    sound = 550;
+}
+  if (distance < 10) {
+    sound = 600;
+}
+  if (distance < 5) {
+    sound = 700;
+}
+  if (distance > 50 || distance <= 0){
+    Serial.println("Out of range");
+    noTone(buzzer);
+  }
+  else {
+    Serial.print(distance);
+    Serial.println(" cm");
+    tone(buzzer, sound);
+  }
+  delay(500);
+}
